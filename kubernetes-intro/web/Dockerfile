@@ -1,4 +1,5 @@
 FROM python:3.9
+MAINTAINER Kodmandvl <kodmandvl@mail.ru>
 COPY homework.html /app/homework.html
 EXPOSE 8000
 WORKDIR /app
