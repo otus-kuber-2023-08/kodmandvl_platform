@@ -53,6 +53,9 @@ minikube addons enable dashboard
 minikube addons list
 
 minikube dashboard
+minikube dashboard --url=false --port=40088
+# or:
+nohup minikube dashboard --url=false --port=40088 &
 
 minikube addons disable dashboard
 minikube addons list
@@ -404,4 +407,43 @@ kubectl logs frontend
 директорию kubernetes-intro:
 
 cp -aiv frontend-pod-healthy.yaml ~/kodmandvl_platform/kubernetes-intro/
+
+cd ~/kodmandvl_platform/
+git status
+git add -A
+git status
+git commit -m "kubernetes-intro"
+git push
+git push --set-upstream origin kubernetes-intro
+git status
+
+И далее Pull Request, кнопка "Отправить на проверку ДЗ", мёрж после проверки.
+
+########## ТЕКСТ ДЛЯ PULL REQUEST: ##########
+
+# Выполнено ДЗ № kubernetes-intro
+
+ - [OK] Основное ДЗ
+ - [OK] Задания со *
+
+## В процессе сделано:
+ - установка необходимых инструментов (Docker Engine, minikube, kubectl, автодополнение для kubectl, k9s)
+ - все описанные в методических указаниях действия (подробности и ответы на задания со * в kodmandvl_platform/kubernetes-intro/README.md)
+
+## Как запустить проект web-pod:
+ - kubectl apply -f web-pod.yaml
+ - nohup kubectl port-forward --address 0.0.0.0 pods/web 1234:8000 &
+
+## Как проверить работоспособность web-pod:
+ - Перейти по ссылке http://localhost:1234
+
+## Как запустить проект frontend:
+ - kubectl apply -f frontend-pod-healthy.yaml
+
+## Как проверить работоспособность frontend:
+ - kubectl get pods frontend
+ - kubectl logs frontend
+
+## PR checklist:
+ - [OK] Выставлен label с темой домашнего задания
 
