@@ -1,0 +1,19 @@
+# Service for frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: frontend
+  ports:
+  - name: http
+    port: {{ .Values.service.port }}
+{{- if eq .Values.service.type "NodePort" }}
+    nodePort: {{ .Values.service.NodePort }}
+{{- end }}
+    targetPort: {{ .Values.service.targetPort }}
