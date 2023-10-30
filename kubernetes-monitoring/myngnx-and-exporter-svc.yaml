@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myngnx
+  name: myngnx-svc
+spec:
+  ports:
+  - name: nginx-port
+    nodePort: 30080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: exporter-port
+    nodePort: 30113
+    port: 9113
+    protocol: TCP
+    targetPort: 9113
+  selector:
+    app: myngnx
+  type: NodePort

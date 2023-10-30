@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myngnx-deploy
+  labels:
+    app: myngnx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myngnx
+  strategy:
+    type: RollingUpdate # Возьмем стратегию RollingUpdate с maxUnavailable 0 и maxSurge 100%
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 100%
+  template:
+    metadata:
+      name: myngnx # Название Pod
+      labels: # Метки в формате key: value
+        app: myngnx
+    spec: # Описание Pod
+      containers: # Описание контейнеров внутри Pod
+      - name: myngnx # Название контейнера
+        image: docker.io/kodmandvl/mynginx:v4 # Образ, из которого создается контейнер
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 8080
+        livenessProbe:
+          tcpSocket: { port: 8080 }
