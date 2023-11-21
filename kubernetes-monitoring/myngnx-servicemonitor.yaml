@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: myngnx-servicemonitor
+  labels:
+    team: kodmandvl
+spec:
+  selector:
+    matchLabels:
+      app: myngnx
+  endpoints:
+  - port: exporter-port
