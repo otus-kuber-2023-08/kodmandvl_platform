@@ -1,0 +1,44 @@
+tolerations:
+  - operator: "Exists"
+
+config:
+  inputs: |
+    [INPUT]
+        Name tail
+        Path /var/log/containers/*
+        multiline.parser docker, cri
+        Tag kube.*
+        Mem_Buf_Limit 5MB
+        Skip_Long_Lines On        
+    [INPUT]
+        Name              tail
+        Tag               nginx.*
+        Path              /var/log/containers/ingress-nginx-controller*.log
+        Parser            docker, cri
+        Mem_Buf_Limit     5MB
+        Skip_Long_Lines   On
+  outputs: |
+    [OUTPUT]
+        Name es
+        Match kube.*
+        Host elasticsearch-master
+        Logstash_Format On
+        Logstash_Prefix kube
+        Retry_Limit False
+        tls On
+        tls.verify Off
+        http_user elastic
+        http_passwd bCVRlg2UXKDRVkZl
+        Suppress_Type_Name On
+    [OUTPUT]
+        Name es
+        Match nginx.*
+        Host elasticsearch-master
+        Logstash_Format On
+        Logstash_Prefix nginx
+        Retry_Limit False
+        tls On
+        tls.verify Off
+        http_user elastic
+        http_passwd bCVRlg2UXKDRVkZl
+        Suppress_Type_Name On
