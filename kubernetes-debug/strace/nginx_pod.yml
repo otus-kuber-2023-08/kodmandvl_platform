@@ -1,0 +1,8 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: myngnx
+spec:
+  containers:
+    - name: myngnx
+      image: docker.io/kodmandvl/mynginx:v5
