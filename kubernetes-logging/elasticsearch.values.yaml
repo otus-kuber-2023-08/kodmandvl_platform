@@ -1,0 +1,46 @@
+master:
+  nodeSelector:
+    yandex.cloud/node-group-id: cat8r1gtkvf4kds78kmf
+
+  tolerations:
+    - key: node-role
+      operator: Equal
+      value: infra
+      effect: NoSchedule
+
+data:
+  nodeSelector:
+    yandex.cloud/node-group-id: cat8r1gtkvf4kds78kmf
+  tolerations:
+    - key: node-role
+      operator: Equal
+      value: infra
+      effect: NoSchedule
+
+coordinating:
+  nodeSelector:
+    yandex.cloud/node-group-id: cat8r1gtkvf4kds78kmf
+  tolerations:
+    - key: node-role
+      operator: Equal
+      value: infra
+      effect: NoSchedule
+
+ingest:
+  nodeSelector:
+    yandex.cloud/node-group-id: cat8r1gtkvf4kds78kmf
+  tolerations:
+    - key: node-role
+      operator: Equal
+      value: infra
+      effect: NoSchedule
+
+metrics:
+  nodeSelector:
+    yandex.cloud/node-group-id: cat8r1gtkvf4kds78kmf
+  tolerations:
+    - key: node-role
+      operator: Equal
+      value: infra
+      effect: NoSchedule
+
