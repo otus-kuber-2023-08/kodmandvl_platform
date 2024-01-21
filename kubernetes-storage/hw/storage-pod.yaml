@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: storage-pod
+spec:
+  containers:
+    - name: storage-pod
+      image: kodmandvl/mypostgres16:rocky88
+      volumeMounts:
+      - mountPath: "/pgdata"
+        name: csi-volume
+# command было в исходном примере, а здесь закомментируем его:
+#      command: [ "sleep", "1000000" ]
+# Добавим securityContext, чтобы у нас были права на /pgdata (т.к. в kodmandvl/mypostgres16:rocky88 у меня прописано для пользователя postgres ID 1032 и там нет root-полномочий):
+  securityContext:
+    fsGroup: 1032
+  volumes:
+    - name: csi-volume
+      persistentVolumeClaim:
+        claimName: storage-pvc # defined in storage-pvc.yaml
+  restartPolicy: Always
